@@ -29,6 +29,9 @@ gem 'nokogiri', '~> 1.8.5'
 # Use pry for debugging
 gem 'pry', '~> 0.11.3'
 
+# Use rubocop for ruby code style
+gem 'rubocop', '~> 0.59.2'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
