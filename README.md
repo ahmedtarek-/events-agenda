@@ -9,4 +9,11 @@ The website has 3 main parts:
 ## Versions
 * Ruby: 2.5.0
 * Rails: 5.2
-* Database: Mysql (for simple deployment)
+* Database: Sqlite3 (for simple deployment)
+
+## Database
+* used Sqlite3 for simplicity
+* basic id (not uuid)
+
+## Models
+* One Event model that encapsulates all info collected for agenda
