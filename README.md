@@ -6,6 +6,11 @@ The website has 3 main parts:
 2. Database layer that stores the scraped data
 3. Web app that interacts with this database to view the agenda online
 
+## Usage
+1. Clone
+2. bundle install
+3. run ```clockwork clock.rb``` (to run the cronjob that updates the events agenda)
+
 ## Versions
 * Ruby: 2.5.0
 * Rails: 5.2
