@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   validates :start_date, presence: true
   validates :web_source, presence: true, inclusion: {in: WEB_SOURCE_POSSIBLE_VALUES}
 
-  COMPARABLE_FIELDS = [:title, :url, :start_date]
+  COMPARABLE_FIELDS = [:title, :url, :start_date, :web_source]
 
   def equals?(json_object)
     COMPARABLE_FIELDS.map { |field| send(field) == json_object[field] }.all?
