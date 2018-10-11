@@ -6,11 +6,16 @@ class WebCrawler
     @current_page = current_page
   end
 
-  def data_scraper(url)
-    Nokogiri::HTML(open(url))
-  end
 
   private
 
   attr_accessor :current_page
+
+  def next_page
+  	@current_page + 1
+  end
+
+  def data_scraper(url)
+    Nokogiri::HTML(open(url))
+  end
 end

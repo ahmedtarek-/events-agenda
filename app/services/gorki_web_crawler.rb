@@ -3,10 +3,9 @@ class GorkiWebCrawler < WebCrawler
   URL = 'https://gorki.de/en/programme'
   NAME = 'Gorki'
 
-  def crawl
-    url = page_to_url(@current_page)
-    base_date = page_to_date(@current_page)
-    crawl_page(url, base_date)
+  def crawl(page)
+    @current_page = page
+    crawl_page(page_url, page_date)
   end
 
   private
@@ -52,20 +51,15 @@ class GorkiWebCrawler < WebCrawler
     }
   end
 
-  def page_to_date(page)
-    page_to_date_mapping[page]
+  def page_date
+    GorkiWebCrawler.page_to_date_mapping[@current_page]
   end
 
-  def page_to_url(page)
-    date = page_to_date(page)
-    "#{URL}/#{date}/all"
+  def page_url
+    "#{URL}/#{page_date}/all"
   end
 
-  def page
-    current_page
-  end
-
-  def page_to_date_mapping
+  def self.page_to_date_mapping
     @mapping ||= [*0..2].map do |next_value|
       day = Date.today.next_month(next_value)
       [next_value, "#{day.year}/#{day.month}"]
