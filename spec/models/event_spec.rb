@@ -17,4 +17,8 @@ RSpec.describe Event do
   describe '#web_source' do
     it { should validate_inclusion_of(:web_source).in_array(Event::WEB_SOURCE_POSSIBLE_VALUES) }
   end
+
+  describe '#start_date' do
+    it { should validate_presence_of(:start_date) }
+  end
 end
