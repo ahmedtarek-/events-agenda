@@ -12,4 +12,14 @@ class Event < ActiveRecord::Base
   def equals?(json_object)
     COMPARABLE_FIELDS.map { |field| send(field) == json_object[field] }.all?
   end
+
+  class << self
+    # Returns false if given object is not complete
+    # Cleans json_object of other unimportant fields
+    def equivalent_record_exists?(json_object)
+      return false unless (COMPARABLE_FIELDS - json_object.keys).empty?
+
+      Event.exists?(json_object.select { |key, _| COMPARABLE_FIELDS.include?(key) })
+    end
+  end
 end
