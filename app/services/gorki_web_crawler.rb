@@ -3,16 +3,30 @@ class GorkiWebCrawler < WebCrawler
   URL = 'https://gorki.de/en/programme'
   NAME = 'Gorki'
 
-  def crawl(page)
-    @current_page = page
-    crawl_page(page_url, page_date)
+  def crawl(page_number)
+    @current_page = page_number
+
+    begin
+      scrapped_page = data_scraper(page_url)
+      crawl_page(scrapped_page, page_date)
+    rescue OpenURI::HTTPError, Errno::ENOENT
+      respond_with_failure('Could not open page')
+    end
+  end
+
+  class << self
+    def page_to_date_mapping
+      @page_to_date_mapping ||= [*0..2].map do |next_value|
+        day = Date.today.next_month(next_value)
+        [next_value, "#{day.year}/#{day.month}"]
+      end.to_h
+    end
   end
 
   private
 
-  def crawl_page(url, base_date)
+  def crawl_page(page, base_date)
     events = []
-    page = data_scraper(url)
 
     sections = page.css('div.item-list.schedule-item-list.sticky-wrap')
 
@@ -25,7 +39,7 @@ class GorkiWebCrawler < WebCrawler
       end
     end
 
-    events
+    respond_with_success(events)
   end
 
   def parse_row(row, date)
@@ -45,9 +59,9 @@ class GorkiWebCrawler < WebCrawler
       event_info: event_info,
       img:        img,
       url:        row.css('h2 > a').first.attributes['href'].value,
-      start_date: date,
-      end_date:   date,
-      source:     NAME
+      start_date: date.to_s,
+      end_date:   date.to_s,
+      web_source: NAME
     }
   end
 
@@ -57,12 +71,5 @@ class GorkiWebCrawler < WebCrawler
 
   def page_url
     "#{URL}/#{page_date}/all"
-  end
-
-  def self.page_to_date_mapping
-    @mapping ||= [*0..2].map do |next_value|
-      day = Date.today.next_month(next_value)
-      [next_value, "#{day.year}/#{day.month}"]
-    end.to_h
   end
 end
