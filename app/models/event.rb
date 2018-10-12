@@ -9,6 +9,12 @@ class Event < ActiveRecord::Base
 
   COMPARABLE_FIELDS = [:title, :url, :start_date, :web_source]
 
+  scope :with_ordered_by_date, -> { order(start_date: :asc) }
+  scope :with_happening_now_or_later, -> {
+    where('start_date > ? OR (start_date < ? AND end_date > ?)',
+      Time.zone.today, Time.zone.today, Time.zone.today)
+  }
+  
   def equals?(json_object)
     COMPARABLE_FIELDS.map { |field| send(field) == json_object[field] }.all?
   end
