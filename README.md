@@ -1,10 +1,11 @@
 # README
 
 ## Intro
-The website has 3 main parts:
-1. Web Scraper that continuosly parses Gorki and CO websites (personal favorites)
-2. Database layer that stores the scraped data
-3. Web app that interacts with this database to view the agenda online
+The application is divided into several modules:
+1. Web Scraper that parses Gorki and CO websites (personal favorites)
+2. A Job that is controlled by Clockwork and communicates with the scrapper to fetch data and stores them
+3. Database layer that stores the scraped data
+4. Web interfact that communicates with this database to view the agenda online
 
 ## Usage
 1. Clone
