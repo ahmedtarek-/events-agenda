@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
 
-  WEB_SOURCE_POSSIBLE_VALUES = ['Gorki', 'CO']
+  WEB_SOURCE_POSSIBLE_VALUES = ['Gorki', 'CO-Berlin']
 
   validates :title, presence: true
   validates :url, presence: true, uniqueness: true
