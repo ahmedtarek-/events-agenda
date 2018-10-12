@@ -1,0 +1,14 @@
+<table style="width:100%">
+  <tr>
+    <th>Title</th>
+    <th>Date</th> 
+    <th>Websource</th>
+  </tr>
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= event.title %></td>
+      <td><%= event.start_date.strftime('%-b %-e %-Y') %></td> 
+      <td><%= event.web_source %></td>
+    </tr>
+  <% end %>
+</table>
