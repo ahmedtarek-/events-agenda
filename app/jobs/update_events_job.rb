@@ -6,9 +6,13 @@ class UpdateEventsJob < ApplicationJob
 
   def perform(*args)
     gorki_crawler = GorkiWebCrawler.new
+    co_crawler = COWebCrawler.new
 
-    puts 'Started crawling Gorki data...'
+    logger.info 'Started crawling Gorki data...'
     trigger_crawler(gorki_crawler)
+
+    logger.info 'Started crawling CO-Berlin data...'
+    trigger_crawler(co_crawler)
   end
 
   def trigger_crawler(crawler)
@@ -18,7 +22,7 @@ class UpdateEventsJob < ApplicationJob
     until hit_existing_record
       response = crawler.crawl(page)
       if response[:status] == 'fail' || response[:count].zero?
-        puts 'Stopping. End of crawled data'
+        logger.info 'Stopping. End of crawled data'
         return
       end
 
@@ -27,7 +31,7 @@ class UpdateEventsJob < ApplicationJob
       begin
         try_creating_events(events)
       rescue HitExistingRecordError => e
-        puts "Stopping. #{e}"
+        logger.info "Stopping. #{e}"
         return
       end
 
@@ -44,7 +48,7 @@ class UpdateEventsJob < ApplicationJob
       count += 1 if record.save
     end
 
-    puts "Successfully created #{count} Event records"
+    logger.info "Successfully created #{count} Event records"
   end
 
   def event_params(event_object)
