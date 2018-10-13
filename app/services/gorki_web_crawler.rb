@@ -1,5 +1,6 @@
 # app/services/gorki_web_crawler.rb
 class GorkiWebCrawler < WebCrawler
+  BASE_URL = 'https://gorki.de'
   URL = 'https://gorki.de/en/programme'
   NAME = 'Gorki'
 
@@ -50,7 +51,7 @@ class GorkiWebCrawler < WebCrawler
     event_info = "#{main_info.split.join(' ')}\n#{second_info.split.slice(1..second_info.size).join(' ')}"
     description = row.css('div.cast > ul > li').map { |item| item.text.split.join(' ') }.join(', ')
 
-    img = !row.css('picture > img').first.nil? ? URL + row.css('picture > img').first['src'] : ''
+    img = !row.css('picture > img').first.nil? ? BASE_URL + row.css('picture > img').first['src'] : ''
 
     {
       title:      row.css('h2 > a').first.text,
