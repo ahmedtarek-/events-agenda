@@ -57,7 +57,7 @@ class GorkiWebCrawler < WebCrawler
       category:   category,
       desc:       description,
       event_info: event_info,
-      img:        img,
+      img_url:    img,
       url:        row.css('h2 > a').first.attributes['href'].value,
       start_date: date.to_s,
       end_date:   date.to_s,

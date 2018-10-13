@@ -44,7 +44,7 @@ class COWebCrawler < WebCrawler
       category:   row.css('span.article-category').text,
       desc:       row.css('div.article-subtitle').text,
       event_info: row.css('div.article-text').text,
-      img:        row.css('div.calender-image > img').first['src'],
+      img_url:    row.css('div.calender-image > img').first['src'],
       start_date: DateTime.parse(start_date).to_s,
       end_date:   DateTime.parse(end_date).to_s,
       url:        row.css('a').first.attributes['href'].value,
