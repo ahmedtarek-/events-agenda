@@ -1,11 +1,26 @@
+<h4>Filter Events</h4>
+<%= form_for :event_search, url: events_path, html: { method: 'GET' } do |f| %>
+  <%= f.text_field :title, placeholder: "Experimental Synths" %>
+  
+  <label>Date: </label>
+  <%= f.date_select(:date) %>
+  
+  <label>Web Source: </label>
+  <%= f.select :web_source,
+    Event::WEB_SOURCE_POSSIBLE_VALUES
+  %>
+<% end -%>
+
 <table style="width:100%">
   <tr>
+    <th>Image</th>
     <th>Title</th>
     <th>Date</th> 
     <th>Websource</th>
   </tr>
   <% @events.each do |event| %>
     <tr>
+      <td><img src="<%= event.img_url %>" height="42" width="42"></img></td>
       <td><%= event.title %></td>
       <td><%= event.start_date.strftime('%-b %-e %-Y') %></td> 
       <td><%= event.web_source %></td>
