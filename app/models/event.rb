@@ -14,6 +14,10 @@ class Event < ActiveRecord::Base
     where('start_date > ? OR (start_date < ? AND end_date > ?)',
       Time.zone.today, Time.zone.today, Time.zone.today)
   }
+
+  scope :filter_title, ->(title) { where('lower(title) LIKE lower(?)', title) }
+  scope :filter_date, ->(date) { where('start_date <= ? AND end_date >= ? ', date, date) }
+  scope :filter_web_source, ->(web_source) { where(web_source: web_source) }
   
   def equals?(json_object)
     COMPARABLE_FIELDS.map { |field| send(field) == json_object[field] }.all?

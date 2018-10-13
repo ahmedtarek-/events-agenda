@@ -1,17 +1,17 @@
 <h4>Filter Events</h4>
-<%= form_for :event_search, url: events_path, html: { method: 'GET' } do |f| %>
+<%= form_with url: events_path, html: { method: 'GET' }, local: true do |f| %>
   <%= f.text_field :title, placeholder: "Experimental Synths" %>
   
   <label>Date: </label>
   <%= f.date_select(:date) %>
   
   <label>Web Source: </label>
-  <%= f.select :web_source,
-    Event::WEB_SOURCE_POSSIBLE_VALUES
-  %>
+  <%= f.select :web_source, Event::WEB_SOURCE_POSSIBLE_VALUES %>
+
+  <%= f.submit "Filter Events" %>
 <% end -%>
 
-<table style="width:100%">
+<table style="width:100%; margin-top: 10px">
   <tr>
     <th>Image</th>
     <th>Title</th>

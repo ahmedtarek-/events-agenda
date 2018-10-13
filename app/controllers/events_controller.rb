@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show]
 
   def index
+
   end
 
   def show
@@ -12,10 +13,14 @@ class EventsController < ApplicationController
   private
 
   def set_events
-    @events = Event.with_happening_now_or_later.with_ordered_by_date
+    @events = EventFilter.new(index_params).execute
   end
 
   def set_event
     @event = Event.find(params[:id])
+  end
+
+  def index_params
+    params.permit(EventsHelper.index_params)
   end
 end
