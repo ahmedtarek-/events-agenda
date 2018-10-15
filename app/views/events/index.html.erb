@@ -22,7 +22,7 @@
     <tr>
       <td><img src="<%= event.img_url %>" height="42" width="42"></img></td>
       <td><%= event.title %></td>
-      <td><%= event.start_date.strftime('%-b %-e %-Y') %></td> 
+      <td><%= event.decorate.date_range %></td> 
       <td><%= event.web_source %></td>
     </tr>
   <% end %>

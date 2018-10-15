@@ -32,6 +32,9 @@ gem 'rubocop', '~> 0.59.2'
 # Use clockwork for cron jobs
 gem 'clockwork', '~> 2.0', '>= 2.0.3'
 
+# Draper adds decorators, that are used to encapsulate model-related view-logic, see: https://github.com/drapergem/draper
+gem 'draper', '~> 3.0', '>= 3.0.1'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
