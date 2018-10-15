@@ -21,6 +21,7 @@ class EventsController < ApplicationController
   end
 
   def index_params
-    params.permit(EventsHelper.index_params)
+    date = ApplicationHelper.date_params_to_date_object(params)
+    params.merge(date: date).permit(EventsHelper.index_params)
   end
 end

@@ -1,9 +1,9 @@
+# app/services/event_filter.rb
 class EventFilter
   FILTER_FIELDS = %w[title date web_source]
-  
+
   def initialize(params = {})
     @filter_fields = params.select { |field, value| FILTER_FIELDS.include?(field) && value.present? }
-    # binding.pry
   end
 
   def execute
