@@ -1,5 +1,8 @@
 # README
 
+## Visit the app
+https://rene-events-agenda.herokuapp.com/
+
 ## Intro
 The main idea was to implement independant modules for ease of scalability for each module (and each can be extracted in the future into a microservice). Hence the application is divided into these modules:
 1. Web Scraper that parses Gorki and CO websites (personal favorites)
@@ -15,14 +18,14 @@ The main idea was to implement independant modules for ease of scalability for e
 ## Versions
 * Ruby: 2.5.0
 * Rails: 5.2
-* Database: Sqlite3 (for simple deployment)
+* Database: Postgres (for simple deployment)
 
 ## Improvements
-1. Only implemented model tests. Add tests for the scraper module and the cron job
-2. Migrate to Postgres
+1. Only implemented model tests.
+2. Add tests for the scraper module and the cron job
 
 ## Database
-* used Sqlite3 for simplicity
+* used Sqlite3 for simplicity at first but then migrated to Postgres to deploy to heroku
 * basic id (not uuid)
 
 ## Models
