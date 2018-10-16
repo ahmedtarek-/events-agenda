@@ -10,6 +10,7 @@ class EventDecorator < Draper::Decorator
 
   def date_range
     return start_date if object.start_date == object.end_date
+    
     "#{start_date} - #{end_date}"
   end
 end
