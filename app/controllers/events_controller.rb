@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show]
 
   def index
-
+    @values = index_params.to_h
   end
 
   def show
@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   end
 
   def index_params
-    date = ApplicationHelper.date_params_to_date_object(params)
-    params.merge(date: date).permit(EventsHelper.index_params)
+    params[:date] = ApplicationHelper.date_params_to_date_object(params)
+    params.permit(EventsHelper.index_params)
   end
 end
