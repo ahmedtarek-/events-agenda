@@ -1,5 +1,5 @@
+# app/controllers/events_controller.rb
 class EventsController < ApplicationController
-  
   before_action :set_events, only: [:index]
   before_action :set_event, only: [:show]
 
@@ -7,8 +7,7 @@ class EventsController < ApplicationController
     @values = index_params.to_h
   end
 
-  def show
-  end
+  def show; end
 
   private
 

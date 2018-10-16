@@ -1,8 +1,8 @@
 # app/services/gorki_web_crawler.rb
 class GorkiWebCrawler < WebCrawler
-  BASE_URL = 'https://gorki.de'
-  URL = 'https://gorki.de/en/programme'
-  NAME = 'Gorki'
+  BASE_URL = 'https://gorki.de'.freeze
+  URL = 'https://gorki.de/en/programme'.freeze
+  NAME = 'Gorki'.freeze
 
   def crawl(page_number)
     @current_page = page_number

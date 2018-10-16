@@ -1,7 +1,7 @@
 # app/services/co_web_crawler.rb
 class COWebCrawler < WebCrawler
-  URL = 'https://www.co-berlin.org/en/calender'
-  NAME = 'CO-Berlin'
+  URL = 'https://www.co-berlin.org/en/calender'.freeze
+  NAME = 'CO-Berlin'.freeze
 
   def crawl(page_number)
     @current_page = page_number

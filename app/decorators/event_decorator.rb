@@ -1,3 +1,4 @@
+# app/decorators/event_decorator.rb
 class EventDecorator < Draper::Decorator
   def start_date
     object.start_date.strftime('%-b %-e %-Y')

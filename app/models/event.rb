@@ -1,13 +1,12 @@
+# app/models/event.rb
 class Event < ActiveRecord::Base
-
-  WEB_SOURCE_POSSIBLE_VALUES = ['Gorki', 'CO-Berlin']
+  WEB_SOURCE_POSSIBLE_VALUES = ['Gorki', 'CO-Berlin'].freeze
+  COMPARABLE_FIELDS = [:title, :url, :start_date, :web_source].freeze
 
   validates :title, presence: true
   validates :url, presence: true, uniqueness: true
   validates :start_date, presence: true
-  validates :web_source, presence: true, inclusion: {in: WEB_SOURCE_POSSIBLE_VALUES}
-
-  COMPARABLE_FIELDS = [:title, :url, :start_date, :web_source]
+  validates :web_source, presence: true, inclusion: { in: WEB_SOURCE_POSSIBLE_VALUES }
 
   scope :with_ordered_by_date, -> { order(start_date: :asc) }
   scope :with_happening_now_or_later, -> {
@@ -18,7 +17,7 @@ class Event < ActiveRecord::Base
   scope :filter_title, ->(title) { where('lower(title) LIKE lower(?)', title) }
   scope :filter_date, ->(date) { where('start_date <= ? AND end_date >= ? ', date, date) }
   scope :filter_web_source, ->(web_source) { where(web_source: web_source) }
-  
+
   def equals?(json_object)
     COMPARABLE_FIELDS.map { |field| send(field) == json_object[field] }.all?
   end
